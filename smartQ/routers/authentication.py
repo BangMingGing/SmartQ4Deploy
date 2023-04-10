@@ -47,7 +47,7 @@ async def login(request: Request, response: Response):
                 access_token = token.create_access_token(data={"sub": user["email"]})
                 response = templates.TemplateResponse("/login.html", {"request": request, "msg": msg})
                 response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
-                return templates.TemplateResponse("menu.html",{'request' : request})
+                return response
     except:
         errors.append("Something Wrong")
         return templates.TemplateResponse("login.html", {"request": request, "errors": errors})
